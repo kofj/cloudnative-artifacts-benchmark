@@ -1,0 +1,17 @@
+[Unit]
+Description=Nydus service
+
+[Service]
+ExecStart=/usr/local/bin/containerd-nydus-grpc \
+    --config-path /etc/nydusd-config.json \
+    --shared-daemon \
+    --log-level info \
+    --root /var/lib/containerd/io.containerd.snapshotter.v1.nydus \
+    --cache-dir /var/lib/nydus/cache \
+    --address /run/containerd/containerd-nydus-grpc.sock \
+    --nydusd-path /usr/local/bin/nydusd \
+    --nydusimg-path /usr/local/bin/nydus-image \
+    --log-to-stdout
+
+[Install]
+WantedBy=multi-user.target

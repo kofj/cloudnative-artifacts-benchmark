@@ -1,0 +1,4 @@
+[proxy_plugins]
+[proxy_plugins.nydus]
+address = "/run/containerd/containerd-nydus-grpc.sock"
+type = "snapshot"

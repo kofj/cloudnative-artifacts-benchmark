@@ -1,0 +1,57 @@
+- name: upload nydus binary
+  tags:
+    - install
+  copy:
+    src: "{{ playbook_dir }}/files/nydus/bin.tar.gz"
+    dest: ~/nydus.bin.tar.gz
+    mode: 0644
+  changed_when:
+- name: decompress binary
+  tags:
+    - install
+  command: bash -c 'tar -zxvf ~/nydus.bin.tar.gz -C /usr/local/bin && if [ ! -f /usr/local/bin/nydusd ]; then ln -s /usr/local/bin/nydusd-fusedev /usr/local/bin/nydusd; fi'
+  changed_when:
+- name: make cache dir
+  tags:
+    - install
+  file:
+    state: directory
+    name: /cache
+    mode: 0644
+  changed_when:
+- name: config file
+  tags:
+    - install
+  copy:
+    src: "{{ playbook_dir }}/files/nydus/config/nydusd-config.json"
+    dest: /etc/nydusd-config.json
+    mode: 0644
+- name: nydus service file
+  tags:
+    - install
+  copy:
+    src: "{{ playbook_dir }}/files/nydus/config/nydus.service"
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: 0644
+- name: config containerd plugins
+  tags:
+    - install
+  blockinfile:
+    block: |
+      disable_snapshot_annotations = false
+      snapshotter = "nydus"
+    path: /etc/containerd/config.toml
+    insertafter: default_runtime_name = "runc"
+    backup: yes
+    marker: "# {mark} config containerd plugins"
+- name: config containerd proxy plugins
+  tags:
+    - install
+  blockinfile:
+    block: "{{ lookup('file', 'files/nydus/config/snapshotter.toml') }}"
+    path: /etc/containerd/config.toml
+    backup: yes
+    marker: "# {mark} config containerd proxy plugins"
+

@@ -1,0 +1,5 @@
+- name: remove images
+  command: bash -c 'docker rmi "{{ registry }}/{{ repostory }}/{{ item }}'
+  with_items: "{{ case_images }}"
+  changed_when:
+  tags: ["clean"]

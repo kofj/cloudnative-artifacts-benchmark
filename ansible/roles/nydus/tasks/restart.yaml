@@ -1,0 +1,14 @@
+- name: Start nydus
+  tags:
+    - restart
+  systemd:
+    name: nydus
+    state: restarted
+    enabled: yes
+- name: Restart containerd
+  tags:
+    - restart
+  systemd:
+    name: containerd
+    state: restarted
+    enabled: yes

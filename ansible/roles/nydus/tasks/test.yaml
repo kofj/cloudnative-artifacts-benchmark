@@ -1,0 +1,10 @@
+- name: test
+  tags:
+    - test
+  command: ls -al ~/
+  changed_when: 
+  register: info
+- name: debug
+  tags:
+    - test
+  debug: var=info.stdout_lines

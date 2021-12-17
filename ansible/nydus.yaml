@@ -1,0 +1,5 @@
+---
+- hosts: nydus
+  remote_user: 
+  roles:
+    - nydus

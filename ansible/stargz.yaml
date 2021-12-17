@@ -1,0 +1,5 @@
+---
+- hosts: stargz
+  remote_user: 
+  roles:
+    - stargz

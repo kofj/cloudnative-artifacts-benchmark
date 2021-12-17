@@ -1,0 +1,5 @@
+- name: remove images
+  command: bash -c 'if crictl inspecti "{{ registry }}/{{ repostory }}/{{ item }}" ;then crictl rmi "{{ registry }}/{{ repostory }}/{{ item }}" ; else echo "no exists"; fi'
+  with_items: "{{ case_images }}"
+  changed_when:
+  tags: ["clean"]

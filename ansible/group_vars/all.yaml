@@ -1,0 +1,12 @@
+ansible_ssh_private_key_file: ~/.ssh/inc_id_rsa
+case_images:
+  - phpmyadmin:latest
+  - mysql:8.0.27
+  - apparate-1w:latest
+  - apparate-1g:latest
+  - scf-2g:latest
+  - nginx:1.17.8
+  - glassfish:4.1-jdk8
+  - gcc:9.2.0
+  - python:3.7-hello-3
+  - rethinkdb:latest

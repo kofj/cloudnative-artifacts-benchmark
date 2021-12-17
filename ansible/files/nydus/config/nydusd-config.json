@@ -1,0 +1,29 @@
+{
+  "device": {
+    "backend": {
+      "type": "registry",
+      "config": {
+        "scheme": "https",
+        "host": "fanjiankong-bj.tencentcloudcr.com",
+        "auth": "MTAwMDEyOTUxMDY5OmV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJa05XUWpjNk1rVlhWenBSU3pWS09qZElOekk2VkZwWlJEcEVOME5DT2s1S00wYzZTMXBYVXpvMFV6UkhPa1EzUjBFNldrTmFRanBLVGxwSUluMC5leUp2ZDI1bGNsVnBiaUk2SWpNek1qRXpNemM1T1RRaUxDSnZjR1Z5WVhSdmNsVnBiaUk2SWpFd01EQXhNamsxTVRBMk9TSXNJblJ2YTJWdVNXUWlPaUpqTlc5bk1Xc3hNWEZqYkdWbmEyUmhjVzgxTUNJc0ltVjRjQ0k2TVRrMU1ERTFOVGN5T0N3aWJtSm1Jam94TmpNME56azFOekk0TENKcFlYUWlPakUyTXpRM09UVTNNamg5LnhVRWZvUDlrVkNiVWo1b2NONDh1STdsUzhiVEFVRi1SLUMtTHZRcnhDTG1JUEZ6R1djNUFqTmxXZWdORWxLbm9SVm0xTVFXSGszLVRGdXozTEZoVV9XYVA3OWNHcmM0THdzMXVHeDVMdXdteWJSZnlsdzBCUlJMY0lOZHdKUkJfZU1xSkRXRzU3bld3Sk5oenZqenJYYkVTX0VIRl9TbmtBRGpzdG1xYVVEZzhhd3ZhbUFHTVcxZ2dFdTZfeTlpb1I0dk1Mc0tHZ005VGZ6WlVzWUY3cUJRLWZnS3NjdW95OUl5V09ZaFpyOEg1RkY0QzEzNkRoZm1HaHdpN1gtZ0tVUlpwR1h0dGk0QTd0OG00N0owYmxKY2ZubkNIMktrOTAxc1dUNW9yZlVNS3lNWEZJT0ctVmVpamgxbXhkdDBGaTJ2OC1zaE5QVWljZmZqTTN1VUU5QQ==",
+        "timeout": 5,
+        "connect_timeout": 5,
+        "retry_limit": 0
+      }
+    },
+    "cache": {
+      "type": "blobcache",
+      "config": {
+        "work_dir": "/cache"
+      }
+    }
+  },
+  "mode": "direct",
+  "digest_validate": false,
+  "iostats_files": true,
+  "enable_xattr": true,
+  "fs_prefetch": {
+    "enable": true,
+    "threads_count": 4
+  }
+}

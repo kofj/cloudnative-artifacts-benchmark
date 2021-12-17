@@ -1,0 +1,4 @@
+- include_tasks: install.yaml
+  tags: ["always"]
+- include_tasks: remove-images.yaml
+  tags: ["never", "clean"]
