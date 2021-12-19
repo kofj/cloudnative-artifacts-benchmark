@@ -18,3 +18,7 @@ k8s/apparate/scf-2g.yaml
 k8s/docker/scf-2g.yaml
 k8s/nydus/scf-2g.yaml
 k8s/stargz/scf-2g.yaml
+analysis
+temp/
+*.html
+.vscode/
