@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: rethinkdb
+spec:
+  selector:
+    matchLabels:
+      app: rethinkdb
+  template:
+    metadata:
+      labels:
+        app: rethinkdb
+    spec:
+      containers:
+      - name: container
+        image: fanjiankong-bj.tencentcloudcr.com/nydus/rethinkdb:latest
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 0
+          periodSeconds: 1
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        lab.kofj.net/nydus: "true"

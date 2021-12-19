@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: python
+spec:
+  selector:
+    matchLabels:
+      app: python
+  template:
+    metadata:
+      labels:
+        app: python
+    spec:
+      containers:
+      - name: container
+        image: fanjiankong-bj.tencentcloudcr.com/apparate/python:3.7-hello-3-apparate
+        command: [bash, "-c", "date; python -c 'print(\"[apparate] finished\",flush=True)'; date; echo finish > /finish; tail -f /dev/null"]
+        readinessProbe:
+          exec:
+            command:
+              - cat
+              - /finish
+          initialDelaySeconds: 0
+          periodSeconds: 1
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        cloud.tencent.com/apparate: "true"

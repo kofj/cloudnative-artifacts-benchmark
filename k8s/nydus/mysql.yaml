@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: container
+          image: fanjiankong-bj.tencentcloudcr.com/nydus/mysql:8.0.27
+          imagePullPolicy: Always
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: mP8a5APN85vD2vFL
+          readinessProbe:
+            exec:
+              command: ["mysql", "-h", "127.0.0.1", "-pmP8a5APN85vD2vFL", "-e", "SELECT 1"]
+            initialDelaySeconds: 3
+            periodSeconds: 1
+            timeoutSeconds: 1
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        lab.kofj.net/nydus: "true"

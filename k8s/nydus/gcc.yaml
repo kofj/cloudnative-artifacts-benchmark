@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: gcc
+spec:
+  selector:
+    matchLabels:
+      app: gcc
+  template:
+    metadata:
+      labels:
+        app: gcc
+    spec:
+      containers:
+        - name: container
+          image: fanjiankong-bj.tencentcloudcr.com/nydus/gcc:9.2.0
+          imagePullPolicy: Always
+          command: [bash, "-c", 'date; gcc /src/main.c; date; echo "[nydus] finished"; echo finish > /finish; tail -f /dev/null']
+          readinessProbe:
+            exec:
+              command:
+                - cat
+                - /finish
+            initialDelaySeconds: 1
+            periodSeconds: 1
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        lab.kofj.net/nydus: "true"

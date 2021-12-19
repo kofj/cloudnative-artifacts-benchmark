@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: files-1w
+spec:
+  selector:
+    matchLabels:
+      app: files-1w
+  template:
+    metadata:
+      labels:
+        app: files-1w
+    spec:
+      containers:
+      - name: container
+        image: fanjiankong-bj.tencentcloudcr.com/apparate/apparate-1w:latest-apparate
+        command: [bash, "-c", 'date; find /1 -type f -exec md5sum {} 1>/dev/null 2>/dev/null \; ; date; echo "[apparate] finished"; echo finish > /finish; tail -f /dev/null']
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /finish
+          initialDelaySeconds: 1
+          periodSeconds: 1
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        cloud.tencent.com/apparate: "true"

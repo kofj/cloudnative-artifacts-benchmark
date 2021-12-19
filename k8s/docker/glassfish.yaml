@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: glassfish
+spec:
+  selector:
+    matchLabels:
+      app: glassfish
+  template:
+    metadata:
+      labels:
+        app: glassfish
+    spec:
+      containers:
+      - name: container
+        image: fanjiankong-bj.tencentcloudcr.com/apparate/glassfish:4.1-jdk8
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 2
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        lab.kofj.net/docker: "true"

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: phpmyadmin
+spec:
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - name: container
+          image: fanjiankong-bj.tencentcloudcr.com/nydus/phpmyadmin:latest
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 0
+            periodSeconds: 1
+      terminationGracePeriodSeconds: 5
+      nodeSelector:
+        lab.kofj.net/nydus: "true"
